@@ -1,27 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ToDos from "./components/ToDos";
+import AddToDo from "./components/AddToDo";
+import React, { Component } from 'react';;
+
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      todos: [],
+    };
+  }
+
+  handleAddToDo(id){
+
+  }
+
+  handleDeleteToDo(id){
+
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="">
+        <h1>ToDo App</h1> <hr/ >
+        <AddToDo addToDo={this.handleAddToDo.bind(this)} />
+        <ToDos todos={this.state.todos} onDelete={this.handleDeleteToDo.bind(this)} /> <hr />
       </div>
-    );
+    )
   }
 }
 
