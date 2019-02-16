@@ -14,7 +14,7 @@ class ToDos extends Component {
         if (this.props.todos) {
             todoItems = this.props.todos.map(todo => {
                 return (
-                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.title} todo={todo} />
+                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.id} todo={todo} />
                 )
             })
         }

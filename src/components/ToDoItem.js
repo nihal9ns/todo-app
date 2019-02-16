@@ -9,7 +9,7 @@ class ToDoItem extends Component {
     render() {
         return (
             <li className="ToDoItem">
-                {this.props.todo.title} : {this.props.todo.todo} : {this.props.todo.todoDate}  <button onClick={this.deleteToDo.bind(this, this.props.todo.id)}>X</button>
+                {this.props.todo.title} : {this.props.todo.todo_description} : {this.props.todo.todo_date}  <button onClick={this.deleteToDo.bind(this, this.props.todo.id)}>X</button>
             </li>
         );
     }

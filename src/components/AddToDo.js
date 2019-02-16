@@ -23,8 +23,8 @@ class AddToDo extends Component {
                 newToDo: {
                     // Add id
                     title: this.refs.title.value,
-                    todo: this.refs.todo.value,
-                    todoDate: this.refs.todoDate.value
+                    todo_description: this.refs.todo_description.value,
+                    date: this.refs.date.value
                 }
             },
                 function () {
@@ -48,12 +48,12 @@ class AddToDo extends Component {
                     <br />
                     <div>
                         <label>To-Do</label> <br />
-                        <input type="text" ref="todo" />
+                        <input type="text" ref="todo_description" />
                     </div>
                     <br />
                     <div>
                         <label>To-Do Date</label> <br />
-                        <input type="date" ref="todoDate" />
+                        <input type="date" ref="date" />
                     </div>
                     <br />
                     <input type="submit" value="Submit" />
