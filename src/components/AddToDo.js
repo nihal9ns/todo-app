@@ -11,11 +11,6 @@ class AddToDo extends Component {
     }
 
     handleSubmit(e) {
-
-        // this.setState({},function(){
-        // SYNTAX
-        // });
-
         if (this.refs.title.value === '') {
             alert('Value of title is required...');
         } else {

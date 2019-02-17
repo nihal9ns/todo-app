@@ -1,6 +1,8 @@
 import './App.css';
+import './components/Hello';
 import ToDos from "./components/ToDos";
 import AddToDo from "./components/AddToDo";
+import Login from "./components/Login";
 import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
@@ -18,12 +20,11 @@ class App extends Component {
 
     this.state = {
       todos: [],
-      email: ""
+      email: "",
+      isLoggedIn: false
     };
 
     this.test = this.test.bind(this);
-    this.checkUser = this.checkUser.bind(this);
-
   }
 
   componentWillMount(){
@@ -49,44 +50,6 @@ class App extends Component {
       todos: data.data.todo
     });
     console.log("todos : ",this.state);
-  }
-
-
-  handleLogin(e){
-    console.log(this.refs.email.value);
-    console.log(this.refs.password.value);
-
-    client.query({
-      query: gql`
-      query{
-        user{
-          email
-          password
-        }
-      }
-      `,
-    })
-    .then(data => this.checkUser(data))
-    .catch(error => console.error(error));
-    
-
-    this.setState({
-      email: this.refs.email.value,
-    });
-    e.preventDefault();
-  }
-
-  checkUser(data){
-    let email = this.state.email;
-    console.log("EMAIL : ",email);
-    console.log("EMAIL REFS : ",this.refs.email.value);
-    for(let i=0;i<data.data.user.length; i++){
-      if(email === data.data.user[i].email){
-        console.log("WORKS");        
-      }else{
-        console.log("NO");
-      }
-    }
   }
 
   handleAddToDo(todo) {
@@ -162,40 +125,30 @@ class App extends Component {
     });
   }
 
+
+  handleSetLogin(){
+    this.setState({
+      isLoggedIn: true
+    });
+  }
+
   render() {
-    return (
+
+    if(this.state.isLoggedIn){
+      return (
       <div className="">
         <h1>ToDo App</h1> <hr />
-          <div className="LoginForm">
-                <h3>Login</h3> <hr />
-                <form onSubmit={this.handleLogin.bind(this)}>
-                    <div>
-                        <label>Email</label> <br />
-                        <input type="text" ref="email" />
-                    </div>
-                    <br />
-                    <div>
-                        <label>Password</label> <br />
-                        <input type="password" ref="password" />
-                    </div>
-                    <br />                  
-                    <input type="submit" value="Login" />
-                </form>
-            </div>
-
-
         <AddToDo addToDo={this.handleAddToDo.bind(this)} />
-        <ToDos todos={this.state.todos} onDelete={this.handleDeleteToDo.bind(this)} /> <hr />
-      </div>
-    )
+        <ToDos todos={this.state.todos} onDelete={this.handleDeleteToDo.bind(this)} /> <hr />                
+      </div>  
+      )    
+    }else{
+      return (
+      <div className="">
+        <Login setLogin={this.handleSetLogin.bind(this)} />
+      </div> )
+    }
   }
 }
 
 export default App;
-
-
-// const HelloWorld = ({name}) => (
-//  <div>{`Hi ${name}`}</div>
-// );
-
-// export default HelloWorld;
