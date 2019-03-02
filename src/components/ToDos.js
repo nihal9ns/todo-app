@@ -6,11 +6,9 @@ class ToDos extends Component {
     deleteToDo(id) {
         this.props.onDelete(id);
     }
-
     render() {
         let todoItems;
-        console.log('this.props.todos', this.props.todos);
-        console.log('type ', typeof(this.props.todos));
+        console.log('this.props.todos', this.props.todos);        
         if (this.props.todos) {
             todoItems = this.props.todos.map(todo => {
                 return (
@@ -21,7 +19,7 @@ class ToDos extends Component {
 
         return (
             <div className="ToDos">
-                <h3>Pending ToDos</h3>
+                <h3>List of ToDo's</h3>
                 {todoItems}
             </div>
         );

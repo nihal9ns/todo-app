@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addToDo } from '../actions/todo';
 
 class AddToDo extends Component {
 
@@ -19,11 +22,12 @@ class AddToDo extends Component {
                     // Add id
                     title: this.refs.title.value,
                     todo_description: this.refs.todo_description.value,
-                    date: this.refs.date.value
+                    todo_date: this.refs.todo_date.value
                 }
             },
                 function () {
                     console.log(this.state);
+                    // this.props.addToDo(this.state.newToDo);
                     this.props.addToDo(this.state.newToDo);
                 });
         }
@@ -48,7 +52,7 @@ class AddToDo extends Component {
                     <br />
                     <div>
                         <label>To-Do Date</label> <br />
-                        <input type="date" ref="date" />
+                        <input type="date" ref="todo_date" />
                     </div>
                     <br />
                     <input type="submit" value="Submit" />
@@ -58,4 +62,13 @@ class AddToDo extends Component {
     }
 }
 
-export default AddToDo;
+// export default AddToDo;
+AddToDo.propTypes = {
+	addToDo: PropTypes.func.isRequired,	
+};
+
+const mapStateToProps = (state) => ({
+	todo: state.todo,	
+});
+
+export default connect(mapStateToProps, { addToDo })(AddToDo);
