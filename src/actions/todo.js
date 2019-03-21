@@ -5,8 +5,7 @@ const { insertUserMutation, deleteUserMutation } = require('../graphql/mutations
 const { loginUser } = require('../graphql/queries/userQueries');
 
 export const  getToDos = (email) => dispatch => {    
-    // fetchToDos(email);
-    console.log("inside fetchToDos");
+    // fetchToDos(email);    
     const todos = [
         {
             title: "E",
@@ -44,11 +43,11 @@ export const  addToDo = (newToDo) => dispatch => {
     // this.getToDos("abc");
 }
 
-export const  deleteToDo = (id) => dispatch => {    
-    deleteToDoMutation(id);
+export const  deleteSingleToDo = (title) => dispatch => {    
+    // deleteToDoMutation(id);
     dispatch({
         type: DELETE_TODO,
-        payload: { id }
+        payload: { title }
     });
 }
 

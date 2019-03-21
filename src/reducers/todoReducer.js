@@ -1,4 +1,5 @@
 import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER, DELETE_USER, FETCH_USER, ALREADY_REGISTERED, NOT_REGISTERED } from '../actions/types';
+const R = require("rambda");
 
 const initialState = {
     todos: [
@@ -27,33 +28,29 @@ const initialState = {
     user: {},
     isLoggedIn: false,
     isRegistered: false
-}
+};
 
-export default function(state = initialState, action){
+export default function(state = initialState, action){        
 	switch(action.type){
         case ADD_TODO:        
 		 return{             
 		 	...state,		 	
-             todo: action.payload,
-             todos: [action.payload],
-             isLoggedIn: true,
-             isRegistered: true                         
+             todo: action.payload.newToDo,
+             todos: [...state.todos, action.payload.newToDo],                                
          };         
          
          case FETCH_TODOS:        
 		 return{             
-		 	...state,		 	
-             todos: action.payload,
-             isLoggedIn: true,
-             isRegistered: true
+             ...state,		 	            
+             todos: R.concat(state.todos, action.payload.todos),            
          };
 
-         case DELETE_TODO:        
+         case DELETE_TODO:                 
+         const index = state.todos.findIndex(x => x.title === action.payload.title);         
+         state.todos.splice(index, 1);         
 		 return{             
-		 	...state,		 	
-             todos: action.payload,
-             isLoggedIn: true,
-             isRegistered: true
+		 	...state,		 	            
+             todos: [...state.todos],            
          };
 
          case ADD_USER:        

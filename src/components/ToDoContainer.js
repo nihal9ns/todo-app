@@ -3,31 +3,33 @@ import AddToDo from './AddToDo';
 import ToDos from './ToDos';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getToDos } from '../actions/todo';
+import { getToDos, deleteSingleToDo } from '../actions/todo';
 class ToDoContainer extends Component {
 
     componentDidMount(){
-        this.props.getToDos("abc");
-        console.log("props : ",this.props);
+        this.props.getToDos("abc");        
+    }
+
+    handleDeleteToDo(title){
+      this.props.deleteSingleToDo(title);
     }
   render() {
     return (
       <div>
         <AddToDo />
-        <ToDos todo={this.props.todo.todos}/>
+        <ToDos todo={this.props.todo.todos} onDelete={this.handleDeleteToDo.bind(this)} />
       </div>
     )
   }
 }
 
 ToDoContainer.propTypes = {
-	getToDos: PropTypes.func.isRequired,
+  getToDos: PropTypes.func.isRequired,
+  deleteSingleToDo: PropTypes.func.isRequired,
 };
-
-// export default ToDos;
 
 const mapStateToProps = (state) => ({
 	todo: state.todo,
 });
 
-export default connect(mapStateToProps, { getToDos })(ToDoContainer);
+export default connect(mapStateToProps, { getToDos, deleteSingleToDo })(ToDoContainer);

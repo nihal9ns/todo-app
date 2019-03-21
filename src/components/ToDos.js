@@ -3,16 +3,16 @@ import ToDoItem from './ToDoItem';
 
 class ToDos extends Component {
 
-    deleteToDo(id) {
-        this.props.onDelete(id);
+    deleteToDo(title) {        
+        this.props.onDelete(title);
     }
     render() {
         let todoItems;
-        console.log('this.props.todo', this.props.todo.todos);         
-        if (this.props.todo.todos) {
-            todoItems = this.props.todo.todos.map(todo => {
+        // console.log('this.props.todo', this.props.todo);         
+        if (this.props.todo) {
+            todoItems = this.props.todo.map(todo => {
                 return (
-                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.id} todo={todo} />
+                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.title} todo={todo} />
                 )
             });
         }
