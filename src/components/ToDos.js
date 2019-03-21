@@ -8,13 +8,13 @@ class ToDos extends Component {
     }
     render() {
         let todoItems;
-        console.log('this.props.todos', this.props.todos);        
-        if (this.props.todos) {
-            todoItems = this.props.todos.map(todo => {
+        console.log('this.props.todo', this.props.todo.todos);         
+        if (this.props.todo.todos) {
+            todoItems = this.props.todo.todos.map(todo => {
                 return (
                     <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.id} todo={todo} />
                 )
-            })
+            });
         }
 
         return (

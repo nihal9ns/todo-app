@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 const {client} = require('../config');
-export function fetchToDos(email="abc"){
+export function fetchToDos(email){
     client.query({
         query: gql`
          query {
@@ -26,6 +26,6 @@ export function fetchToDos(email="abc"){
            }        
         `,
       })
-      .then(data => console.log(data))
+      .then(data => console.log("fetch todos query : ",data))
       .catch(error => console.error(error));
 };

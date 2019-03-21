@@ -5,32 +5,16 @@ import { addToDo } from '../actions/todo';
 
 class AddToDo extends Component {
 
-    constructor() {
-        super();
+    handleSubmit(e) {        
+        const newToDo = {
+            title: this.refs.title.value,
+            todo_description: this.refs.todo_description.value,
+            todo_date: this.refs.todo_date.value
+        };
 
-        this.state = {
-            newToDo: {}
-        }
-    }
+        console.log("newToDo : ",newToDo);
 
-    handleSubmit(e) {
-        if (this.refs.title.value === '') {
-            alert('Value of title is required...');
-        } else {
-            this.setState({
-                newToDo: {
-                    // Add id
-                    title: this.refs.title.value,
-                    todo_description: this.refs.todo_description.value,
-                    todo_date: this.refs.todo_date.value
-                }
-            },
-                function () {
-                    console.log(this.state);
-                    // this.props.addToDo(this.state.newToDo);
-                    this.props.addToDo(this.state.newToDo);
-                });
-        }
+        this.props.addToDo(newToDo);
 
         e.preventDefault();
     }
@@ -62,13 +46,12 @@ class AddToDo extends Component {
     }
 }
 
-// export default AddToDo;
 AddToDo.propTypes = {
 	addToDo: PropTypes.func.isRequired,	
 };
 
 const mapStateToProps = (state) => ({
-	todo: state.todo,	
+	todo: state.todo,
 });
 
 export default connect(mapStateToProps, { addToDo })(AddToDo);

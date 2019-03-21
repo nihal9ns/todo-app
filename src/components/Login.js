@@ -1,71 +1,31 @@
 import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import gql from 'graphql-tag';
-
-const client = new ApolloClient({
-  uri: 'https://todo-hasura-backend.herokuapp.com/v1alpha1/graphql'
-});
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchUser, notRegistered } from '../actions/todo';
 class Login extends Component {
 
-    constructor() {
-        super();
-    
-        this.state = {        
-          email: "",          
-        };
+    componentWillReceiveProps(nextProps){
 
-        this.checkUser = this.checkUser.bind(this);    
+      if(!(nextProps.todo.isRegistered && nextProps.todo.isLoggedIn)){
+        this.props.history.push('/register');
+      }
     }
 
-    handleLogin(e){
-        console.log(this.refs.email.value);
-        console.log(this.refs.password.value);
 
-        let email = this.refs.email.value;
-        let password = this.refs.password.value;
-    
-        client.query({
-          query: gql`
-           query{
-               user(
-                 where:{
-                 	_and: [
-                 	  {email:{_eq: "${email}"}},
-                     {password: {_eq: "${password}"}}
-                   ]
-               	}
-               )
-               {
-                 id
-                 email        
-                 password         
-               }
-             }
-          `,
-        })
-        .then(data => this.checkUser(data, email, password))
-        .catch(error => console.error(error));
+    handleLogin(e){
+        const email = this.refs.email.value;
+        const password = this.refs.password.value;      
+
+        console.log("email : ",email);
+        console.log("password : ",password);
+        
+        this.props.fetchUser(email, password);
 
         e.preventDefault();
       }
     
-      checkUser(data, email, password){
-        console.log("USER DATA : ",data.data.user[0]);
-        if(data.data.user[0].email === email && data.data.user[0].password === password){
-          this.setState({
-            email
-          }, function(){
-              this.props.setLogin(this.state.email);
-          });
-        }        
-      }
-
-      notRegistered(){
-        this.setState({
-          email: ""
-        }, function(){
-          this.props.notRegister();
-        });
+      handleNotRegistered(){
+        this.props.notRegistered();
       }
   render() {
     return (
@@ -81,13 +41,24 @@ class Login extends Component {
                     <label>Password</label> <br />
                     <input type="password" ref="password" />
                 </div>
-                <br />                  
-                Not registered? <button onClick={this.notRegistered.bind(this)}>Register</button> <br />
+                <br />                                  
                 <input type="submit" value="Login" />
-            </form>                
+                <br />                
+            </form>   
+            Not registered? <button onClick={this.handleNotRegistered.bind(this)}>Register</button>             
     </div>
     )
   }
 };
 
-export default Login;
+Login.propTypes = {
+  fetchUser: PropTypes.func.isRequired,	
+  notRegistered: PropTypes.func.isRequired,	
+  todo: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+	todo: state.todo,
+});
+
+export default connect(mapStateToProps, { fetchUser, notRegistered })(Login);
