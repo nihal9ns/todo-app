@@ -1,11 +1,19 @@
 import { FETCH_TODOS, ADD_TODO, DELETE_TODO, CHECK_IF_USER_IS_LOGGED_IN, ADD_USER, DELETE_USER, ALREADY_REGISTERED, NOT_REGISTERED, FETCH_USER } from "./types";
+import axios from 'axios';
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
 const { fetchToDos } = require('../graphql/queries/todoQueries');
 const { addToDoMutation, deleteToDoMutation } = require('../graphql/mutations/todoMutations');
 const { insertUserMutation, deleteUserMutation } = require('../graphql/mutations/userMutations');
 const { loginUser } = require('../graphql/queries/userQueries');
+const client = new ApolloClient({
+    uri: 'https://todo-hasura-backend.herokuapp.com/v1alpha1/graphql'
+});
 
-export const  getToDos = (email) => dispatch => {    
-    // fetchToDos(email);    
+export const  getToDos = (email) => async(dispatch) => {    
+    // const todos = await fetchToDos(email);    
+    // console.log("TODOS : ",todos);    
+    
     const todos = [
         {
             title: "E",
@@ -28,6 +36,7 @@ export const  getToDos = (email) => dispatch => {
             todo_date: "now"
         }
     ];
+
     dispatch({
         type: FETCH_TODOS,
         payload: { todos }
@@ -35,7 +44,7 @@ export const  getToDos = (email) => dispatch => {
 }
 
 export const  addToDo = (newToDo) => dispatch => {    
-    // addToDoMutation(newToDo);    
+    addToDoMutation(newToDo);    
     dispatch({
         type: ADD_TODO,
         payload: { newToDo }

@@ -43,6 +43,8 @@ export default function(state = initialState, action){
 		 return{             
              ...state,		 	            
              todos: R.concat(state.todos, action.payload.todos),            
+             isLoggedIn: true,
+             isRegistered: true
          };
 
          case DELETE_TODO:                 

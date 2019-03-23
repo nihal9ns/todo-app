@@ -1,9 +1,37 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { addUser, alreadyRegistered } from '../actions/todo';
 
+const styles = theme => ({            
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  }         
+});
+
+const spacing =  '24';
+
 class Register extends Component {
+
+    constructor(){
+      super();
+
+      this.state = {
+        email: "",
+        password: ""
+      };
+
+      this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(e){        
+      this.setState({[e.target.name]: e.target.value});
+    }
 
     componentWillReceiveProps(nextProps){
 
@@ -12,15 +40,13 @@ class Register extends Component {
       }
     }
 
-    handleRegister(e){        
-        const email = this.refs.email.value;
-        const password = this.refs.password.value;
+    handleRegister(){        
+        const email = this.state.email;
+        const password = this.state.password;
         console.log("email : ",email);
         console.log("password : ",password);
     
-        this.props.addUser(email, password);
-
-        e.preventDefault();
+        this.props.addUser(email, password);        
       }
   
     handleAlreadyRegistered(){        
@@ -28,23 +54,45 @@ class Register extends Component {
         this.props.alreadyRegistered();
     }
   render() {
+    const { classes } = this.props;
     return (
       <div className="RegisterForm">
-        <h3>Register</h3> <hr />
-            <form onSubmit={this.handleRegister.bind(this)}>
-                <div>
-                    <label>Email</label> <br />
-                    <input type="text" ref="email" />
+        <h3>Register</h3> <hr />            
+        <Grid container justify="center" spacing={Number(spacing)}>
+                <div>                    
+                    <Grid item>         
+                        <TextField                            
+                            label="Email"
+                            name="email"                            
+                            value={this.state.email}
+                            onChange={this.onChange}
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"                            
+                        />   
+                    </Grid>                 
+                </div>                
+                <div>                    
+                    <Grid item>         
+                        <TextField                            
+                            label="Password"
+                            name="password"                            
+                            value={this.state.password}
+                            onChange={this.onChange}
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"                            
+                        />   
+                    </Grid>                 
                 </div>
-                <br />
-                <div>
-                    <label>Password</label> <br />
-                    <input type="password" ref="password" />
-                </div>
-                <br />                                              
-                <input type="submit" value="Register" />
-            </form>                
-            Already registered? <button onClick={this.handleAlreadyRegistered.bind(this)}>Login</button> <br />
+              </Grid>
+              <br />                                                  
+            
+              <Button variant="contained" color="primary" onClick={this.handleRegister.bind(this)}>
+                  REGISTER                              
+              </Button>  
+              <br /> <br />                          
+            Already registered? <Button variant="contained" color="default" onClick={this.handleAlreadyRegistered.bind(this)}>LOGIN</Button>            
       </div>
     )
   }
@@ -60,4 +108,4 @@ const mapStateToProps = (state) => ({
 	todo: state.todo,
 });
 
-export default connect(mapStateToProps, { addUser, alreadyRegistered })(Register);
+export default connect(mapStateToProps, { addUser, alreadyRegistered })(withStyles(styles)(Register));
