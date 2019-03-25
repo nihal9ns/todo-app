@@ -1,33 +1,10 @@
-import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER, DELETE_USER, FETCH_USER, ALREADY_REGISTERED, NOT_REGISTERED } from '../actions/types';
+import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER, FETCH_USER } from '../actions/types';
 const R = require("rambda");
 
 const initialState = {
-    todos: [
-        {
-            title: "A",
-            todo_description: "todo A",
-            todo_date: "now"
-        },
-        {
-            title: "B",
-            todo_description: "todo B",
-            todo_date: "now"
-        },
-        {
-            title: "C",
-            todo_description: "todo C",
-            todo_date: "now"
-        },
-        {
-            title: "D",
-            todo_description: "todo D",
-            todo_date: "now"
-        }
-    ],
+    todos: [],
     todo: {},    
-    user: {},
-    isLoggedIn: false,
-    isRegistered: false
+    user: {},    
 };
 
 export default function(state = initialState, action){        
@@ -42,13 +19,11 @@ export default function(state = initialState, action){
          case FETCH_TODOS:        
 		 return{             
              ...state,		 	            
-             todos: R.concat(state.todos, action.payload.todos),            
-             isLoggedIn: true,
-             isRegistered: true
+             todos: R.concat(state.todos, action.payload.todos),   
          };
 
          case DELETE_TODO:                 
-         const index = state.todos.findIndex(x => x.title === action.payload.title);         
+         const index = state.todos.findIndex(x => x.id === action.payload.id);         
          state.todos.splice(index, 1);         
 		 return{             
 		 	...state,		 	            
@@ -58,42 +33,14 @@ export default function(state = initialState, action){
          case ADD_USER:        
 		 return{             
 		 	...state,		 	
-             user: action.payload,
-             isLoggedIn: true,
-             isRegistered: true                         
+             user: action.payload,             
          };         
          
          case FETCH_USER:        
 		 return{             
              ...state,
-             user: action.payload,             
-             isLoggedIn: true,
-             isRegistered: true
-         };
-
-         case DELETE_USER:        
-		 return{             
-		 	...state,		 	
-             user: action.payload,
-             isLoggedIn: true,
-             isRegistered: true
-         };
-
-         case ALREADY_REGISTERED:        
-		 return{             
-             ...state,     
-             user: {},
-             isLoggedIn: false,        
-             isRegistered: true
-         };
-
-         case NOT_REGISTERED:        
-		 return{             
-             ...state,           
-             user: {},
-             isLoggedIn: false,  
-             isRegistered: false
-         };
+             user: action.payload,                          
+         };         
          
 		default:
 			return state;

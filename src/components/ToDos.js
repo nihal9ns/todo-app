@@ -3,8 +3,8 @@ import ToDoItem from './ToDoItem';
 
 class ToDos extends Component {
 
-    deleteToDo(title) {        
-        this.props.onDelete(title);
+    deleteToDo(id) {        
+        this.props.onDelete(id);
     }
     render() {
         let todoItems;
@@ -12,7 +12,7 @@ class ToDos extends Component {
         if (this.props.todo) {
             todoItems = this.props.todo.map(todo => {
                 return (
-                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.title} todo={todo} />
+                    <ToDoItem onDelete={this.deleteToDo.bind(this)} key={todo.id} todo={todo} />
                 )
             });
         }

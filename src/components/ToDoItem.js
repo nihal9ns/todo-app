@@ -16,21 +16,19 @@ const styles = theme => ({
     icon: {
       margin: theme.spacing.unit,
       fontSize: 32,
-    },
+    }
 });
-
-const spacing = "24";
 class ToDoItem extends Component {
 
-    deleteToDo(title) {
-        this.props.onDelete(title);
+    deleteToDo(id) {
+        this.props.onDelete(id);
     }
     render() {                
         const { classes } = this.props;
 
         return (
             <div>            
-                <Grid container justify="center" spacing={Number(spacing)}>
+                <Grid container justify="center" spacing={24}>
                     <Grid item>                
                         <Paper className={classes.root} elevation={1}>
                             <Typography variant="h5" component="h3">
@@ -42,7 +40,7 @@ class ToDoItem extends Component {
                             <Typography component="p">
                                 Date : {this.props.todo.todo_date}
                             </Typography>
-                            <DeleteIcon className={classes.icon} onClick={this.deleteToDo.bind(this, this.props.todo.title)}/>
+                            <DeleteIcon className={classes.icon} onClick={this.deleteToDo.bind(this, this.props.todo.id)}/>
                         </Paper>             
                     </Grid>
                 </Grid> 

@@ -26,15 +26,10 @@ export async function fetchToDos(email){
            }        
         `,
       })
-      .then(function(data){
-        console.log("fetch todos query : ",data);
-        // const todo = data.todo;
-        // console.log("todo : ",todo);
+      .then(function(data){                
         return data;
       })        
       .catch(error => console.error(error));
-
-      console.log("data inside query : ",data);
 
       return data.todo;
 };

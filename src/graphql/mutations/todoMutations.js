@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 const {client} = require('../config');
-export function addToDoMutation(todo, email="abc"){
+export function addToDoMutation(todo, email){
   client.mutate({
       mutation: gql`
       mutation insert_todo {
@@ -31,7 +31,7 @@ export function addToDoMutation(todo, email="abc"){
     .catch(error => console.error(error));
 };
 
-export function deleteToDoMutation(id, email="abc"){
+export function deleteToDoMutation(id, email){
     client.mutate({
         mutation: gql`
         mutation delete_todo {

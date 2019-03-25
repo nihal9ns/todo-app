@@ -11,10 +11,8 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-    }         
+    },    
 });
-
-const spacing =  '24';
 
 class AddToDo extends Component {
 
@@ -53,7 +51,7 @@ class AddToDo extends Component {
         return (
             <div className="AddToDo">
                 <h3>Add To-Do</h3>                
-                <Grid container justify="center" spacing={Number(spacing)}>
+                <Grid container justify="center" spacing={24}>
                     <Grid item>                
                         <TextField                            
                             label="Title"
@@ -80,7 +78,7 @@ class AddToDo extends Component {
                         <TextField                            
                             label="Date"
                             name="todo_date"
-                            type="datetime-local"                                
+                            type="date"                                
                             value={this.state.todo_date}
                             onChange={this.onChange}
                             className={classes.textField}
