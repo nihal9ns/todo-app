@@ -1,9 +1,8 @@
-import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER, FETCH_USER } from "./types";
+import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER } from "./types";
 
 const { fetchToDos } = require('../graphql/queries/todoQueries');
 const { addToDoMutation, deleteToDoMutation } = require('../graphql/mutations/todoMutations');
 const { insertUserMutation } = require('../graphql/mutations/userMutations');
-const { loginUser } = require('../graphql/queries/userQueries');
 
 export const  getToDos = (email) => async(dispatch) => {    
     const todos = await fetchToDos(email);        
@@ -34,14 +33,6 @@ export const addUser = (email, password) => dispatch => {
     insertUserMutation(email, password);
     dispatch({
         type: ADD_USER,
-        payload: { email }
-    });
-}
-
-export const  fetchUser = (email, password) => dispatch => {    
-    loginUser(email, password);
-    dispatch({
-        type: FETCH_USER,
         payload: { email }
     });
 }

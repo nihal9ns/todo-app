@@ -3,7 +3,7 @@ import AddToDo from './AddToDo';
 import ToDos from './ToDos';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Auth from './Auth0';
+import Auth from './Auth';
 import { getToDos, deleteSingleToDo, addUser } from '../actions/todo';
 
 const auth = new Auth();

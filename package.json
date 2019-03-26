@@ -7,11 +7,10 @@
     "@material-ui/icons": "^3.0.2",
     "apollo-boost": "^0.1.28",
     "auth0-js": "^9.10.1",
-    "axios": "^0.18.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "moment": "^2.24.0",
-    "rambda": "^2.3.1",
+    "ramda": "^0.26.1",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-redux": "^6.0.0",
@@ -25,7 +24,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.js src/**/*.js",
+    "precommit": "lint-staged",
+    "lint-staged": {
+      "*.{js,jsx}": [
+        "pretty-quick --staged",
+        "eslint src/ --fix",
+        "git add"
+      ]
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
