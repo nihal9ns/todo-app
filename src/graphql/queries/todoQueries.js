@@ -1,8 +1,10 @@
-import gql from 'graphql-tag';
-const {client} = require('../config');
-export async function fetchToDos(email){
-    const { data } = await client.query({
-        query: gql`
+import gql from "graphql-tag";
+
+const { client } = require("../config");
+export async function fetchToDos(email) {
+  const { data } = await client
+    .query({
+      query: gql`
          query {
              todo(
                where:
@@ -24,12 +26,12 @@ export async function fetchToDos(email){
                user_email
              }
            }        
-        `,
-      })
-      .then(function(data){                
-        return data;
-      })        
-      .catch(error => console.error(error));
+        `
+    })
+    .then(function(data) {
+      return data;
+    })
+    .catch(error => console.error(error));
 
-      return data.todo;
-};
+  return data.todo;
+}

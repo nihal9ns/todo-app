@@ -1,7 +1,9 @@
-import gql from 'graphql-tag';
-const {client} = require('../config');
-export function addToDoMutation(todo, email){
-  client.mutate({
+import gql from "graphql-tag";
+
+const { client } = require("../config");
+export function addToDoMutation(todo, email) {
+  client
+    .mutate({
       mutation: gql`
       mutation insert_todo {
         insert_todo(
@@ -25,15 +27,16 @@ export function addToDoMutation(todo, email){
           }
         }
       }
-      `,
+      `
     })
     .then(data => console.log(data))
     .catch(error => console.error(error));
-};
+}
 
-export function deleteToDoMutation(id, email){
-    client.mutate({
-        mutation: gql`
+export function deleteToDoMutation(id, email) {
+  client
+    .mutate({
+      mutation: gql`
         mutation delete_todo {
           delete_todo(
             where: 
@@ -47,8 +50,8 @@ export function deleteToDoMutation(id, email){
             affected_rows 
           }
         }
-        `,
+        `
     })
     .then(data => console.log(data))
     .catch(error => console.error(error));
-};
+}
