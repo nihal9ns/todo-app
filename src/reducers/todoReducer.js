@@ -1,4 +1,5 @@
 import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER } from "../actions/types";
+
 const R = require("ramda");
 
 const initialState = {
@@ -22,13 +23,14 @@ export default function(state = initialState, action) {
         todos: R.concat(state.todos, action.payload.todos)
       };
 
-    case DELETE_TODO:
+    case DELETE_TODO: {
       const index = state.todos.findIndex(x => x.id === action.payload.id);
       state.todos.splice(index, 1);
       return {
         ...state,
         todos: [...state.todos]
       };
+    }
 
     case ADD_USER:
       return {

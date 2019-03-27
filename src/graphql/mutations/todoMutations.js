@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 
 const { client } = require("../config");
+
 export function addToDoMutation(todo, email) {
   client
     .mutate({

@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 
 const { client } = require("../config");
+
 export async function fetchToDos(email) {
   const { data } = await client
     .query({
