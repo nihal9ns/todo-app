@@ -30,8 +30,8 @@ export function addToDoMutation(todo, email) {
       }
       `
     })
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    .then(data => data)
+    .catch(error => error);
 }
 
 export function deleteToDoMutation(id, email) {
@@ -53,6 +53,6 @@ export function deleteToDoMutation(id, email) {
         }
         `
     })
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+    .then(data => data)
+    .catch(error => error);
 }

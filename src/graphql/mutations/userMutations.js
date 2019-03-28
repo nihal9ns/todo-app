@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 const { client } = require("../config");
 
-export function insertUserMutation(email, password) {
+export function insertUserMutation(email, password = "") {
   client
     .mutate({
       mutation: gql`
@@ -24,6 +24,6 @@ export function insertUserMutation(email, password) {
           
         `
     })
-    .then(data => console.log("insert user mutation : ", data))
-    .catch(error => console.error(error));
+    .then(data => data)
+    .catch(error => error);
 }

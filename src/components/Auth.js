@@ -1,4 +1,5 @@
 import auth0 from "auth0-js";
+
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: "dev-jlct10i9.auth0.com",
@@ -20,24 +21,20 @@ export default class Auth {
   }
 
   parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     return JSON.parse(window.atob(base64));
   }
 
   handleAuth = () => {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        console.log("ID TOKEN : ", authResult.idToken);
         const decoded = this.parseJwt(authResult.idToken);
-        console.log("DECODED : ", decoded);
         const email = decoded.email;
-        console.log("DECODED EMAIL : ", email);
         this.setSession(authResult, email);
       } else if (err) {
         window.location.href = "/";
-        console.error(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
+        alert(`Error: ${err.error}. Check the console for details.`);
       }
     });
   };

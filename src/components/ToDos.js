@@ -7,7 +7,6 @@ class ToDos extends Component {
   }
   render() {
     let todoItems;
-    // console.log('this.props.todo', this.props.todo);
     if (this.props.todo) {
       todoItems = this.props.todo.map(todo => {
         return (

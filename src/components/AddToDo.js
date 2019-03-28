@@ -32,15 +32,17 @@ class AddToDo extends Component {
   }
 
   handleSubmit(e) {
-    const newToDo = {
-      title: this.state.title,
-      todo_description: this.state.todo_description,
-      todo_date: this.state.todo_date
-    };
+    if (!this.state.todo_date) {
+      alert("Please enter a date!");
+    } else {
+      const newToDo = {
+        title: this.state.title,
+        todo_description: this.state.todo_description,
+        todo_date: this.state.todo_date
+      };
 
-    console.log("newToDo : ", newToDo);
-
-    this.props.addToDo(newToDo);
+      this.props.addToDo(newToDo);
+    }
 
     e.preventDefault();
   }

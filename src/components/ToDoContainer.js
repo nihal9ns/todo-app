@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import AddToDo from "./AddToDo";
 import ToDos from "./ToDos";
 import Auth from "./Auth";
-import { getToDos, deleteSingleToDo, addUser } from "../actions/todo";
+import { getToDos, deleteSingleToDo } from "../actions/todo";
 
 const auth = new Auth();
 class ToDoContainer extends Component {
@@ -12,18 +13,15 @@ class ToDoContainer extends Component {
     const email = localStorage.getItem("Auth0->email");
 
     if (email) {
-      console.log("email from todo container : ", email);
       this.props.getToDos(email);
     }
   }
 
   handleLogout() {
-    console.log("logout");
     auth.logout();
   }
 
   handleLogin() {
-    console.log("login");
     auth.login();
   }
 
@@ -36,7 +34,13 @@ class ToDoContainer extends Component {
     if (isAuthenticated()) {
       return (
         <div>
-          <button onClick={this.handleLogout.bind(this)}>Logout</button>
+          <Button
+            variant="contained"
+            color="default"
+            onClick={this.handleLogout.bind(this)}
+          >
+            LOGOUT
+          </Button>
           <AddToDo />
           <ToDos
             todo={this.props.todo.todos}
@@ -47,7 +51,9 @@ class ToDoContainer extends Component {
     } else {
       return (
         <div>
-          <button onClick={this.handleLogin.bind(this)}>Login</button>
+          <Button color="primary" onClick={this.handleLogin.bind(this)}>
+            LOGIN
+          </Button>
         </div>
       );
     }
@@ -56,7 +62,6 @@ class ToDoContainer extends Component {
 
 ToDoContainer.propTypes = {
   getToDos: PropTypes.func.isRequired,
-  addUser: PropTypes.func.isRequired,
   deleteSingleToDo: PropTypes.func.isRequired
 };
 
@@ -66,5 +71,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getToDos, deleteSingleToDo, addUser }
+  { getToDos, deleteSingleToDo }
 )(ToDoContainer);
