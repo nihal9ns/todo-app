@@ -43,6 +43,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## A glimpse of the backend
 
+### `todos query`
+
 ![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/master/query.png)
+
+### `user schema`
+
 ![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/master/user_schema.png)
+
+### `todo schema`
+
 ![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/master/todo_schema.png)
