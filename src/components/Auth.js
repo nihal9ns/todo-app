@@ -4,7 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: "dev-jlct10i9.auth0.com",
     clientID: "vpkVGSkkhtKFZwRB9v0kwnBhZPaOQ9qg",
-    redirectUri: "http://localhost:3000/auth",
+    redirectUri: "https://todo-app-hasura.herokuapp.com/auth",
     responseType: "token id_token",
     scope: "openid profile email"
   });

@@ -3,7 +3,8 @@
     "browser": true,
     "es6": true,
     "amd": true,
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "extends": "eslint:recommended",
   "globals": {
