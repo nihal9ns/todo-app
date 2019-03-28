@@ -1,5 +1,7 @@
 ## ToDo App powered by Hasura GraphQL Engine
 
+![](todo.gif)
+
 A simple ToDo App powered by Hasura GraphQL Engine at the backend and react at the frontend. Hasura provides instant realtime GraphQL on Postgres with fine grained access control. Check it out here...
 
 https://hasura.io/
@@ -38,3 +40,9 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## A glimpse of the backend
+
+![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/query.png)
+![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/user_schema.png)
+![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/todo_schema.png)
