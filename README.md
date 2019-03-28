@@ -1,8 +1,10 @@
 ## ToDo App powered by Hasura GraphQL Engine
 
-A simple ToDo App powered by Hasura GraphQL Engine at the backend and react at the frontend. Hasura provides instant realtime GraphQL on Postgres with fine grained access control.
+A simple ToDo App powered by Hasura GraphQL Engine at the backend and react at the frontend. Hasura provides instant realtime GraphQL on Postgres with fine grained access control. Check it out here...
 
-## Deploy Hasura GraphQL Engine
+https://hasura.io/
+
+## Deploy Hasura GraphQL Engine to Heroku
 
 [![Deploy HGE on heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/hasura/graphql-engine-heroku)
 
