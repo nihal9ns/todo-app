@@ -36,10 +36,18 @@ Note: This app uses the route http://localhost:3000/auth as the callback URl, yo
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run dev`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### `npm run build`
+
+Creates a production build.
+
+### `npm start`
+
+Serves a production build.
 
 ## A glimpse of the backend
 
