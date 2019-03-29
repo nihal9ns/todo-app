@@ -1,21 +1,10 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import Auth from "./Auth";
-import { addUser } from "../actions/todo";
 
 const auth = new Auth();
 class AuthCallback extends Component {
-  componentDidMount() {
+  componentWillMount() {
     auth.handleAuth();
-    const email = localStorage.getItem("Auth0->email");
-    const password = "";
-    if (email) {
-      setTimeout(() => {
-        this.props.addUser(email, password);
-      }, 3000);
-      window.location.href = "/";
-    }
   }
   render() {
     return (
@@ -29,15 +18,4 @@ class AuthCallback extends Component {
   }
 }
 
-AuthCallback.propTypes = {
-  addUser: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-  todo: state.todo
-});
-
-export default connect(
-  mapStateToProps,
-  { addUser }
-)(AuthCallback);
+export default AuthCallback;

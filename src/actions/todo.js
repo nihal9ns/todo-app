@@ -1,11 +1,10 @@
-import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER } from "./types";
+import { FETCH_TODOS, ADD_TODO, DELETE_TODO } from "./types";
 
 const { fetchToDos } = require("../graphql/queries/todoQueries");
 const {
   addToDoMutation,
   deleteToDoMutation
 } = require("../graphql/mutations/todoMutations");
-const { insertUserMutation } = require("../graphql/mutations/userMutations");
 
 export const getToDos = email => async dispatch => {
   const todos = await fetchToDos(email);
@@ -29,13 +28,5 @@ export const deleteSingleToDo = (id, email) => dispatch => {
   dispatch({
     type: DELETE_TODO,
     payload: { id }
-  });
-};
-
-export const addUser = (email, password) => dispatch => {
-  insertUserMutation(email, password);
-  dispatch({
-    type: ADD_USER,
-    payload: { email }
   });
 };

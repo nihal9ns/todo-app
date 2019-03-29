@@ -1,10 +1,12 @@
 import auth0 from "auth0-js";
 
+const { insertUserMutation } = require("../graphql/mutations/userMutations");
+
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: "dev-jlct10i9.auth0.com",
     clientID: "vpkVGSkkhtKFZwRB9v0kwnBhZPaOQ9qg",
-    redirectUri: "https://todo-app-hasura.herokuapp.com/auth",
+    redirectUri: "http://localhost:3000/auth",
     responseType: "token id_token",
     scope: "openid profile email"
   });
@@ -32,6 +34,7 @@ export default class Auth {
         const decoded = this.parseJwt(authResult.idToken);
         const email = decoded.email;
         this.setSession(authResult, email);
+        insertUserMutation(email);
       } else if (err) {
         window.location.href = "/";
         alert(`Error: ${err.error}. Check the console for details.`);
