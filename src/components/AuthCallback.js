@@ -13,7 +13,7 @@ class AuthCallback extends Component {
     if (email) {
       setTimeout(() => {
         this.props.addUser(email);
-      }, 1000);
+      }, 3000);
       window.location.href = "/";
     }
   }
