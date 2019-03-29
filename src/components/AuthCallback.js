@@ -9,10 +9,10 @@ class AuthCallback extends Component {
   componentDidMount() {
     auth.handleAuth();
     const email = localStorage.getItem("Auth0->email");
-
+    const password = "";
     if (email) {
       setTimeout(() => {
-        this.props.addUser(email);
+        this.props.addUser(email, password);
       }, 3000);
       window.location.href = "/";
     }

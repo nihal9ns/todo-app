@@ -32,8 +32,8 @@ export const deleteSingleToDo = (id, email) => dispatch => {
   });
 };
 
-export const addUser = email => dispatch => {
-  insertUserMutation(email);
+export const addUser = (email, password) => dispatch => {
+  insertUserMutation(email, password);
   dispatch({
     type: ADD_USER,
     payload: { email }
