@@ -62,3 +62,6 @@ Serves a production build.
 ### `todo schema`
 
 ![alt text](https://raw.githubusercontent.com/nihal9ns/todo-app/master/todo_schema.png)
+
+## Check out the app here 
+https://todo-app-hasura.herokuapp.com/
