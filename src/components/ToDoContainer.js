@@ -9,7 +9,7 @@ import { getToDos, deleteSingleToDo } from "../actions/todo";
 
 const auth = new Auth();
 class ToDoContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const email = localStorage.getItem("Auth0->email");
 
     if (email) {
@@ -34,11 +34,7 @@ class ToDoContainer extends Component {
     if (isAuthenticated()) {
       return (
         <div>
-          <Button
-            variant="contained"
-            color="default"
-            onClick={this.handleLogout.bind(this)}
-          >
+          <Button color="default" onClick={this.handleLogout.bind(this)}>
             LOGOUT
           </Button>
           <AddToDo />

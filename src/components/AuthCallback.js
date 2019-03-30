@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Auth from "./Auth";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { authCall } from "../actions/todo";
 
-const auth = new Auth();
 class AuthCallback extends Component {
-  componentWillMount() {
-    auth.handleAuth();
+  componentDidMount() {
+    this.props.authCall();
   }
   render() {
     return (
@@ -18,4 +19,15 @@ class AuthCallback extends Component {
   }
 }
 
-export default AuthCallback;
+AuthCallback.propTypes = {
+  authCall: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  todo: state.todo
+});
+
+export default connect(
+  mapStateToProps,
+  { authCall }
+)(AuthCallback);

@@ -9,11 +9,12 @@ export function addToDoMutation(todo, email) {
       mutation insert_todo {
         insert_todo(
           objects: [
-            {
+            {            
+              id: "${todo.id}",
               title: "${todo.title}",
               todo_description: "${todo.todo_description}",
               todo_date: "${todo.todo_date}",
-              user_email: "${email}"
+              user_email: "${email}",              
             }
           ]
         ) {
@@ -21,10 +22,7 @@ export function addToDoMutation(todo, email) {
             id
             title
             todo_description
-            todo_date
-            created_at
-            updated_at
-            user_email
+            todo_date                                    
           }
         }
       }

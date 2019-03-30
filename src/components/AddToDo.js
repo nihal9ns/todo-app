@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addToDo } from "../actions/todo";
 
+const uuidv4 = require("uuid/v4");
+
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
@@ -36,6 +38,7 @@ class AddToDo extends Component {
       alert("Please enter a date!");
     } else {
       const newToDo = {
+        id: uuidv4(),
         title: this.state.title,
         todo_description: this.state.todo_description,
         todo_date: this.state.todo_date

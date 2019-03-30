@@ -1,11 +1,10 @@
-import { FETCH_TODOS, ADD_TODO, DELETE_TODO, ADD_USER } from "../actions/types";
+import { FETCH_TODOS, ADD_TODO, DELETE_TODO } from "../actions/types";
 
 const R = require("ramda");
 
 const initialState = {
   todos: [],
-  todo: {},
-  user: {}
+  todo: {}
 };
 
 export default function(state = initialState, action) {
@@ -31,12 +30,6 @@ export default function(state = initialState, action) {
         todos: [...state.todos]
       };
     }
-
-    case ADD_USER:
-      return {
-        ...state,
-        user: action.payload
-      };
 
     default:
       return state;

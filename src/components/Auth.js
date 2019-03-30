@@ -2,10 +2,10 @@ import auth0 from "auth0-js";
 
 const { insertUserMutation } = require("../graphql/mutations/userMutations");
 
-export default class Auth {
+class Auth {
   auth0 = new auth0.WebAuth({
     domain: "dev-jlct10i9.auth0.com",
-    clientID: "vpkVGSkkhtKFZwRB9v0kwnBhZPaOQ9qg",
+    clientID: "YSSAqccgFDqWmH5haikn76HxshTBm9x3",
     redirectUri: "http://localhost:3000/auth",
     responseType: "token id_token",
     scope: "openid profile email"
@@ -34,7 +34,6 @@ export default class Auth {
         const decoded = this.parseJwt(authResult.idToken);
         const email = decoded.email;
         this.setSession(authResult, email);
-        insertUserMutation(email);
       } else if (err) {
         window.location.href = "/";
         alert(`Error: ${err.error}. Check the console for details.`);
@@ -42,7 +41,7 @@ export default class Auth {
     });
   };
 
-  setSession(authResult, email) {
+  async setSession(authResult, email) {
     const expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     );
@@ -50,6 +49,8 @@ export default class Auth {
     localStorage.setItem("Auth0->id_token", authResult.idToken);
     localStorage.setItem("Auth0->expires_at", expiresAt);
     localStorage.setItem("Auth0->email", email);
+
+    await insertUserMutation(email);
     window.location.href = "/";
   }
 
@@ -66,3 +67,4 @@ export default class Auth {
     return new Date().getTime() < expiresAt;
   }
 }
+export default Auth;

@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
+import Moment from "react-moment";
 import PropTypes from "prop-types";
 
 const styles = theme => ({
@@ -37,7 +38,7 @@ class ToDoItem extends Component {
                 Description : {this.props.todo.todo_description}
               </Typography>
               <Typography component="p">
-                Date : {this.props.todo.todo_date}
+                Date : <Moment format="LL">{this.props.todo.todo_date}</Moment>
               </Typography>
               <DeleteIcon
                 className={classes.icon}

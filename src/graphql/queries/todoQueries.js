@@ -21,10 +21,7 @@ export async function fetchToDos(email) {
                id
                title
                todo_description
-               todo_date
-               created_at
-               updated_at
-               user_email
+               todo_date                            
              }
            }        
         `
