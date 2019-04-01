@@ -10,6 +10,7 @@ const {
 const auth = new Auth();
 
 export const getToDos = email => async dispatch => {
+  // fetch todos from database
   const todos = await fetchToDos(email);
   dispatch({
     type: FETCH_TODOS,
@@ -17,17 +18,19 @@ export const getToDos = email => async dispatch => {
   });
 };
 
-export const addToDo = newToDo => dispatch => {
+export const addToDo = newToDo => async dispatch => {
   const email = localStorage.getItem("Auth0->email");
-  addToDoMutation(newToDo, email);
+  // add todo to database
+  await addToDoMutation(newToDo, email);
   dispatch({
     type: ADD_TODO,
     payload: { newToDo }
   });
 };
 
-export const deleteSingleToDo = (id, email) => dispatch => {
-  deleteToDoMutation(id, email);
+export const deleteSingleToDo = (id, email) => async dispatch => {
+  // delete todo from database
+  await deleteToDoMutation(id, email);
   dispatch({
     type: DELETE_TODO,
     payload: { id }
@@ -35,5 +38,6 @@ export const deleteSingleToDo = (id, email) => dispatch => {
 };
 
 export const authCall = () => async => {
+  // handle Auth0 API integration
   auth.handleAuth();
 };

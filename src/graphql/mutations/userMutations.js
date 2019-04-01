@@ -4,7 +4,7 @@ const uuidv4 = require("uuid/v4");
 const { client } = require("../config");
 
 export async function insertUserMutation(email) {
-  const result = await client
+  await client
     .mutate({
       mutation: gql`
          mutation insert_user {
@@ -23,10 +23,6 @@ export async function insertUserMutation(email) {
            }
         `
     })
-    .then(function(data) {
-      return data;
-    })
+    .then(data => data)
     .catch(error => error);
-
-  return result;
 }

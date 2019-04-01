@@ -26,10 +26,8 @@ export async function fetchToDos(email) {
            }        
         `
     })
-    .then(function(data) {
-      return data;
-    })
-    .catch(error => console.error(error));
+    .then(data => data)
+    .catch(error => error);
 
   return data.todo;
 }
